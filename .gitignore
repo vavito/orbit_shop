@@ -1,0 +1,36 @@
+### --- ORBIT SHOP: CONFIGURAÇÕES DE AMBIENTE --- ###
+# Nunca suba suas senhas e chaves de acesso
+.env
+access.env
+
+# Ignorar os dados reais do banco (isso fica só no seu PC)
+postgres_data/
+
+### --- JAVA / MAVEN (BACKEND) --- ###
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/resources/architecture.html
+!**/src/test/resources/architecture.html
+
+# Arquivos de log do Spring
+*.log
+
+### --- IDE CONFIGS (IntelliJ, VS Code, Eclipse) --- ###
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.vscode/
+bin/
+.DS_Store
+
+### --- FRONTEND (REACT / TS) --- ###
+node_modules/
+dist/
+build/
+.eslintcache
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*

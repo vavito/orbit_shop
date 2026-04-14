@@ -1,0 +1,30 @@
+services:
+  # Serviço do Banco de Dados
+  db:
+    image: postgres:16-alpine
+    container_name: orbit-shop-db
+    restart: always
+    
+    # Faz a ponte entre o seu computador (localhost:5432) e o container
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    
+    # Variáveis que o Postgres lê para criar o banco e o usuário inicial
+    environment:
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - TZ=America/Sao_Paulo # Ajusta o fuso horário para o de Goiânia/Brasília
+    
+    # Persistência de dados: garante que suas tabelas não sumam ao desligar o PC
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    
+    # Define uma rede interna para que no futuro outros containers (como o backend) se falem
+    networks:
+      - orbit-network
+
+# Define a rede isolada do projeto
+networks:
+  orbit-network:
+    driver: bridge
