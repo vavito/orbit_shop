@@ -1,3 +1,31 @@
 spring:
   application:
     name: orbit-shop
+
+  datasource:
+    # Localhost porque o banco está no Docker mas o Java roda "fora" (na IDE)
+    url: jdbc:postgresql://localhost:5432/orbit_shop_db
+    username: ${DB_USER}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  flyway:
+    enabled: true
+    # baseline-on-migrate é importante se o banco já tiver tabelas manuais
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+
+  jpa:
+    hibernate:
+      # 'validate' é a boa prática quando se usa Flyway
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+# Configuração do Swagger para facilitar o teste da Task B.3 da sua dupla
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
