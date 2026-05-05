@@ -1,1 +1,0 @@
-Apague esse arquivo apenas quando houver algum outro arquivo criado dentro da pasta
