@@ -2,6 +2,7 @@
 # Nunca suba suas senhas e chaves de acesso
 .env
 access.env
+README.md
 
 # Ignorar os dados reais do banco (isso fica só no seu PC)
 postgres_data/
