@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 
 public record ProductResponseDTO(
 
-        Integer id,
+        Long id,
         String name,
         String description,
         BigDecimal price,
