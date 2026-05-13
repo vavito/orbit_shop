@@ -1,24 +1,18 @@
 package com.orbit_shop.customer.domain;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.hibernate.annotations.CollectionIdJavaClass;
 
-import javax.annotation.processing.Generated;
 
-@Table(name = "customer")
-@Entity
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Entity
+@Table(name = "customer")
 public class Customer {
-    // Define que o campo é a chave primária da sua entidade Customer
+
     @Id
-    // Define que o banco de dados gerará o ID de forma automática/incremental
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -36,4 +30,34 @@ public class Customer {
 
     @Column(nullable = false)
     private String password;
+
+    public static Customer create(String name, String email, String cpf, String phone, String password) {
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Nome inválido");
+        if (email == null || email.isBlank()) throw new IllegalArgumentException("Email inválido");
+        if (cpf == null || cpf.length() != 11) throw new IllegalArgumentException("CPF inválido");
+        if (password == null || password.isBlank()) throw new IllegalArgumentException("Senha inválida");
+
+        Customer customer = new Customer();
+        customer.name = name;
+        customer.email = email;
+        customer.cpf = cpf;
+        customer.phone = phone;
+        customer.password = password;
+        return customer;
+    }
+
+    public void updateName(String name) {
+        if (name == null || name.isBlank()) throw new IllegalArgumentException("Nome inválido");
+        this.name = name;
+    }
+
+    public void updatePhone(String phone) {
+        if (phone == null || phone.isBlank()) throw new IllegalArgumentException("Telefone inválido");
+        this.phone = phone;
+    }
+
+    public void changePassword(String newPassword) {
+        if (newPassword == null || newPassword.isBlank()) throw new IllegalArgumentException("Senha inválida");
+        this.password = newPassword;
+    }
 }
