@@ -22,24 +22,22 @@ public class CustomerMapper {
     public Customer toEntity(CustomerRequestDTO dto) {
         if (dto == null) return null;
 
-        Customer customer = new Customer();
-
-        customer.setName(dto.name());
-        customer.setEmail(dto.email());
-        customer.setCpf(dto.cpf());
-        customer.setPhone(dto.phone());
-        customer.setPassword(dto.password());
-
-        return customer;
+        return Customer.create(
+                dto.name(),
+                dto.email(),
+                dto.cpf(),
+                dto.phone(),
+                dto.password()
+        );
     }
 
     public void updateEntityFromDTO(Customer customer, CustomerRequestDTO dto) {
         if (customer == null || dto == null) return;
 
-        customer.setName(dto.name());
-        customer.setEmail(dto.email());
-        customer.setCpf(dto.cpf());
-        customer.setPhone(dto.phone());
-        customer.setPassword(dto.password());
+        customer.updateName(dto.name());
+        customer.updateEmail(dto.email());
+        customer.updateCpf(dto.cpf());
+        customer.updatePhone(dto.phone());
+        customer.changePassword(dto.password());
     }
 }
