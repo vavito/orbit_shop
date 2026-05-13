@@ -34,10 +34,10 @@ public class CustomerMapper {
     public void updateEntityFromDTO(Customer customer, CustomerRequestDTO dto) {
         if (customer == null || dto == null) return;
 
-        customer.setName(dto.name());
-        customer.setEmail(dto.email());
-        customer.setCpf(dto.cpf());
-        customer.setPhone(dto.phone());
-        customer.setPassword(dto.password());
+        customer.updateName(dto.name());
+        customer.updateEmail(dto.email());
+        customer.updateCpf(dto.cpf());
+        customer.updatePhone(dto.phone());
+        customer.changePassword(dto.password());
     }
 }

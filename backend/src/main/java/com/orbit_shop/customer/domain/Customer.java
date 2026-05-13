@@ -60,4 +60,14 @@ public class Customer {
         if (newPassword == null || newPassword.isBlank()) throw new IllegalArgumentException("Senha inválida");
         this.password = newPassword;
     }
+
+    public void updateEmail(String email) {
+        if (email == null || email.isBlank()) throw new IllegalArgumentException("Email inválido");
+        this.email = email;
+    }
+
+    public void updateCpf(String cpf) {
+        if (cpf == null || cpf.length() != 11) throw new IllegalArgumentException("CPF inválido");
+        this.cpf = cpf;
+    }
 }
