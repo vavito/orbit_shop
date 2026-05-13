@@ -22,15 +22,13 @@ public class CustomerMapper {
     public Customer toEntity(CustomerRequestDTO dto) {
         if (dto == null) return null;
 
-        Customer customer = new Customer();
-
-        customer.setName(dto.name());
-        customer.setEmail(dto.email());
-        customer.setCpf(dto.cpf());
-        customer.setPhone(dto.phone());
-        customer.setPassword(dto.password());
-
-        return customer;
+        return Customer.create(
+                dto.name(),
+                dto.email(),
+                dto.cpf(),
+                dto.phone(),
+                dto.password()
+        );
     }
 
     public void updateEntityFromDTO(Customer customer, CustomerRequestDTO dto) {
