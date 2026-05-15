@@ -1,7 +1,6 @@
 package com.orbit_shop.product.domain;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.*;
 
 import java.math.BigDecimal;
@@ -51,21 +50,21 @@ public class Product {
         return product;
     }
 
-    public void updateName(String name) {
+    public void changeName(String name) {
         if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Nome inválido");
         }
         this.name = name;
     }
 
-    public void updatePrice(BigDecimal newPrice) {
+    public void changePrice(BigDecimal newPrice) {
         if (newPrice == null || newPrice.compareTo(BigDecimal.ZERO) < 0) {
             throw new IllegalArgumentException("Preço inválido");
         }
         this.price = newPrice;
     }
 
-    public void updateDescription(String newDescription) {
+    public void changeDescription(String newDescription) {
         this.description = newDescription;
     }
 
@@ -84,5 +83,12 @@ public class Product {
             throw new IllegalStateException("Estoque insuficiente");
         }
         this.quantity -= amount;
+    }
+
+    public void redefineStock(int newQuantity) {
+        if (newQuantity < 0) {
+            throw new IllegalArgumentException("A quantidade de estoque não pode ser negativa");
+        }
+        this.quantity = newQuantity;
     }
 }

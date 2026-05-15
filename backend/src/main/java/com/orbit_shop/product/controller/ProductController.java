@@ -4,6 +4,8 @@ import com.orbit_shop.product.dto.ProductRequestDTO;
 import com.orbit_shop.product.dto.ProductResponseDTO;
 import com.orbit_shop.product.service.ProductService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -17,28 +19,40 @@ public class ProductController {
     private final ProductService service;
 
     @PostMapping
-    public ProductResponseDTO create(@Valid @RequestBody ProductRequestDTO dto) {
-        return service.createProduct(dto);
+    public ResponseEntity<ProductResponseDTO> create(@Valid @RequestBody ProductRequestDTO dto) {
+        ProductResponseDTO response = service.createProduct(dto);
+        // Retorna 201 Created: O status correto para criação de novos recursos
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @GetMapping("/{id}")
-    public ProductResponseDTO getById(@PathVariable Long id) {
-        return service.getProductById(id);
+    public ResponseEntity<ProductResponseDTO> getById(@PathVariable Long id) {
+        ProductResponseDTO response = service.getProductById(id);
+        // Retorna 200 OK: Padrão para buscas bem-sucedidas
+        return ResponseEntity.ok(response);
     }
 
     @GetMapping
-    public List<ProductResponseDTO> getAll() {
-        return service.getAllProducts();
+    public ResponseEntity<List<ProductResponseDTO>> getAll() {
+        List<ProductResponseDTO> response = service.getAllProducts();
+        // Retorna 200 OK: Padrão para listagem
+        return ResponseEntity.ok(response);
     }
 
     @PutMapping("/{id}")
-    public ProductResponseDTO update(@PathVariable Long id,
-                                     @Valid @RequestBody ProductRequestDTO dto) {
-        return service.updateProduct(id, dto);
+    public ResponseEntity<ProductResponseDTO> update(
+            @PathVariable Long id,
+            @Valid @RequestBody ProductRequestDTO dto
+    ) {
+        ProductResponseDTO response = service.updateProduct(id, dto);
+        // Retorna 200 OK: Indica que o recurso foi atualizado com sucesso e o corpo contém a nova versão
+        return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id) {
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         service.deleteProduct(id);
+        // Retorna 204 No Content: O status ideal para deleção, indicando sucesso sem corpo de resposta
+        return ResponseEntity.noContent().build();
     }
 }

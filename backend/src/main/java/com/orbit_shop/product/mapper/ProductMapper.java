@@ -8,7 +8,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class ProductMapper {
 
-    // DTO -> Entity (criação segura via domínio)
+    /**
+     * Converte DTO para Entidade (Criação)
+     * Utiliza o método de fábrica estático para garantir que o objeto
+     * nasça em um estado válido.
+     */
     public Product toEntity(ProductRequestDTO dto) {
         if (dto == null) return null;
 
@@ -20,7 +24,6 @@ public class ProductMapper {
         );
     }
 
-    // Entity -> Response DTO
     public ProductResponseDTO toResponse(Product product) {
         if (product == null) return null;
 
@@ -33,19 +36,12 @@ public class ProductMapper {
         );
     }
 
-    // Atualização controlada (sem quebrar o domínio)
-    public void updateEntity(Product product, ProductRequestDTO dto) {
+    public void applyChanges(Product product, ProductRequestDTO dto) {
         if (product == null || dto == null) return;
 
-        // aqui você usa COMPORTAMENTOS do domínio
-        product.updatePrice(dto.price());
-
-        product.updateDescription(dto.description());
-
-        // se quiser, pode validar nome também
-        product.updateName(dto.name());
-
-        // quantidade
-        product.increaseStock(dto.quantity());
+        product.changeName(dto.name());
+        product.changeDescription(dto.description());
+        product.changePrice(dto.price());
+        product.redefineStock(dto.quantity());
     }
 }
