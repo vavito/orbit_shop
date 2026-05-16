@@ -46,12 +46,12 @@ public class Customer {
         return customer;
     }
 
-    public void updateName(String name) {
+    public void changeName(String name) {
         if (name == null || name.isBlank()) throw new IllegalArgumentException("Nome inválido");
         this.name = name;
     }
 
-    public void updatePhone(String phone) {
+    public void changePhoneNumber(String phone) {
         if (phone == null || phone.isBlank()) throw new IllegalArgumentException("Telefone inválido");
         this.phone = phone;
     }
@@ -61,12 +61,12 @@ public class Customer {
         this.password = newPassword;
     }
 
-    public void updateEmail(String email) {
+    public void changeEmail(String email) {
         if (email == null || email.isBlank()) throw new IllegalArgumentException("Email inválido");
         this.email = email;
     }
 
-    public void updateCpf(String cpf) {
+    public void correctCpf(String cpf) {
         if (cpf == null || cpf.length() != 11) throw new IllegalArgumentException("CPF inválido");
         this.cpf = cpf;
     }

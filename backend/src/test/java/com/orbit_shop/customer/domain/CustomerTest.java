@@ -54,13 +54,13 @@ class CustomerTest {
                 "jonas123"
         );
 
-        customer.updateName("Maria");
+        customer.changeName("Maria");
 
         assertEquals("Maria", customer.getName());
     }
 
     @Test
-    void shouldUpdatePhone() {
+    void shouldChangePhoneNumber() {
         Customer customer = Customer.create(
                 "Jonas",
                 "jonas@gmail.com",
@@ -69,7 +69,7 @@ class CustomerTest {
                 "jonas123"
         );
 
-        customer.updatePhone("(11) 97777-7777");
+        customer.changePhoneNumber("(11) 97777-7777");
 
         assertEquals("(11) 97777-7777", customer.getPhone());
     }
