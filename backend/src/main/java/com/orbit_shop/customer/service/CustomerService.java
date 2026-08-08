@@ -51,7 +51,7 @@ public class CustomerService {
         repository.delete(customer);
     }
 
-    private Customer findById(Long id) {
+    public Customer findById(Long id) {
         return repository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Cliente não encontrado!"));
     }
