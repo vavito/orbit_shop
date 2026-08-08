@@ -12,4 +12,3 @@ public record OrderResponseDTO(
         OrderStatus status,
         List<OrderItemResponseDTO> items
 ) {}
-
