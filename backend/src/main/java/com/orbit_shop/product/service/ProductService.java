@@ -1,6 +1,7 @@
     package com.orbit_shop.product.service;
 
 
+    import com.orbit_shop.customer.domain.Customer;
     import com.orbit_shop.product.domain.Product;
     import com.orbit_shop.product.dto.ProductRequestDTO;
     import com.orbit_shop.product.dto.ProductResponseDTO;
@@ -62,5 +63,10 @@
             }
 
             repository.deleteById(id);
+        }
+
+        public Product findById(Long id) {
+            return repository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Produto não encontrado!"));
         }
     }
